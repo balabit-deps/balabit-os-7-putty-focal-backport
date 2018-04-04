@@ -1,0 +1,34 @@
+From 7fe734afa1251245abe92dfd67068d57a2b82360 Mon Sep 17 00:00:00 2001
+From: Svante Signell <svante.signell@gmail.com>
+Date: Tue, 24 Nov 2015 17:08:36 +0000
+Subject: Fix build failure on GNU/Hurd
+
+putty FTBFS on GNU/Hurd due to a missing definition of PIPE_BUF in
+<limits.h>. This is solved by using the _POSIX_PIPE_BUF defined value
+of 512 instead. (In fact the assertion will never happen, SALT_SIZE is
+defined to 64 and PIPE_BUF is always larger than that, e.g. for Linux
+4096, and so is _POSIX_PIPE_BUF.)
+
+Bug-Debian: https://bugs.debian.org/805505
+Forwarded: yes
+Last-Update: 2015-11-24
+
+Patch-Name: pipe-buf.patch
+---
+ unix/uxshare.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/unix/uxshare.c b/unix/uxshare.c
+index 9279a049..942d5bd8 100644
+--- a/unix/uxshare.c
++++ b/unix/uxshare.c
+@@ -23,6 +23,9 @@
+ #define CONNSHARE_SOCKETDIR_PREFIX "/tmp/putty-connshare"
+ #define SALT_FILENAME "salt"
+ #define SALT_SIZE 64
++#ifndef PIPE_BUF
++#define PIPE_BUF _POSIX_PIPE_BUF
++#endif
+ 
+ /*
+  * Functions provided by uxnet.c to help connection sharing.

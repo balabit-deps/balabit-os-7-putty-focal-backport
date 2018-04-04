@@ -1,0 +1,50 @@
+From 5126ccfe9947c409796ff8e35734eb7a925aa2f2 Mon Sep 17 00:00:00 2001
+From: Andreas Henriksson <andreas@fatal.se>
+Date: Thu, 14 Dec 2017 12:49:04 +0100
+Subject: Use GDK_BACKEND x11 when built with X support
+
+When putty gets built with X Window System support it enables
+code that does direct X11 calls via Xlib. This will crash
+when not running under X11, eg. wayland, broadway, etc.
+
+To make it possible for a generic binary that's been built
+with X11 enabled to also work in wayland, tell GDK to use
+the x11 backend (unless the user has explicitly requested
+something else by setting GDK_BACKEND environment variable,
+but that will likely just make it crash again so maybe
+the 'override' argument to setenv should be 1 instead).
+
+This means putty should run under xwayland by default when
+built with X11 support and started in a wayland session
+like GNOME, etc.
+(For other backends like broadway, this will still likely
+not work as they don't have any equivalent to xwayland.)
+
+Bug-Debian: https://bugs.debian.org/861603
+Last-Update: 2018-04-03
+
+Patch-Name: gdk-backend-x11.patch
+---
+ unix/gtkmain.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/unix/gtkmain.c b/unix/gtkmain.c
+index c80da702..d429fea6 100644
+--- a/unix/gtkmain.c
++++ b/unix/gtkmain.c
+@@ -560,6 +560,15 @@ int main(int argc, char **argv)
+ 
+     progname = argv[0];
+ 
++#ifndef NOT_X_WINDOWS
++    /* Putty does direct X11 specific calls, so in case we're running
++     * under eg. wayland make sure gtk+ still gives us the x11 backend
++     * or putty will segfault at startup.
++     * (eg. XGetDefault, Xlib calls in unix/gtkfont.c, etc.)
++     */
++    setenv("GDK_BACKEND", "x11", 0);
++#endif
++
+     /*
+      * Copy the original argv before letting gtk_init fiddle with
+      * it. It will be required later.
