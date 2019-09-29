@@ -1,3 +1,69 @@
+putty (0.73-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 29 Sep 2019 17:10:38 +0100
+
+putty (0.72-2) unstable; urgency=medium
+
+  * Use debhelper-compat instead of debian/compat.
+  * Port mkicon.py to Python 3 and drop build-dependency on python (closes:
+    #937380).
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 31 Aug 2019 21:46:04 +0100
+
+putty (0.72-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Explicitly build-depend on python3, for test/cryptsuite.py.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 23 Jul 2019 10:49:47 +0100
+
+putty (0.71-1) experimental; urgency=medium
+
+  * Add new upstream release signing key to debian/upstream/signing-key.asc
+    (see https://www.chiark.greenend.org.uk/~sgtatham/putty/keys.html).
+  * New upstream release (see
+    https://www.chiark.greenend.org.uk/~sgtatham/putty/changes.html).
+    - Make "putty user@host" work (closes: #509194).
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 20 Mar 2019 13:11:14 +0000
+
+putty (0.70-6) unstable; urgency=high
+
+  * Apply security patch series from upstream:
+    - New facility for removing pending toplevel callbacks.
+    - Fix one-byte buffer overrun in random_add_noise().
+    - uxnet: clean up callbacks when closing a NetSocket.
+    - sk_tcp_close: fix memory leak of output bufchain.
+    - Fix handling of bad RSA key with n=p=q=0.
+    - Sanity-check the 'Public-Lines' field in ppk files.
+    - Introduce an enum of the uxsel / select_result flags.
+    - Switch to using poll(2) in place of select(2).
+    - RSA kex: enforce the minimum key length.
+    - Fix crash on ESC#6 + combining chars + GTK + odd-width terminal.
+    - Limit the number of combining chars per terminal cell.
+    - minibidi: fix read past end of line in rule W5.
+    - Fix crash printing a width-2 char in a width-1 terminal.
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 17 Mar 2019 09:37:02 +0000
+
+putty (0.70-5) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Mark all binary packages Multi-Arch: foreign.
+  * Configure with --disable-git-commit to avoid a build failure due to
+    trying to redefine SOURCE_COMMIT when building from the Debian git tree.
+  * Cherry-pick from upstream:
+    - Remove a fixed-size buffer in pscp.c (closes: #911955).
+    - Remove a fixed-size buffer in cmdgen.c.
+    - Stop using deprecated gtk_container_set_focus_chain().
+
+  [ Niels Thykier ]
+  * Declare the explicit requirement for (fake)root.
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 28 Oct 2018 18:07:45 +0000
+
 putty (0.70-4) unstable; urgency=medium
 
   * Cherry-pick from upstream:

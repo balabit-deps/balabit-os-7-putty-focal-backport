@@ -1,4 +1,0 @@
-pipe-buf.patch
-gdk-display-beep.patch
-gdk-backend-x11.patch
-ignore-spurious-configure-area-events.patch

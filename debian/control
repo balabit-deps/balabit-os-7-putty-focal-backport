@@ -3,10 +3,11 @@ Section: net
 Priority: optional
 Maintainer: Colin Watson <cjwatson@debian.org>
 Standards-Version: 3.5.9
-Build-Depends: dpkg-dev (>= 1.15.7~), debhelper (>= 9~), dh-autoreconf, dh-exec, pkg-config, libgtk-3-dev, x11proto-core-dev, libx11-dev, imagemagick, python
+Build-Depends: dpkg-dev (>= 1.15.7~), debhelper-compat (= 9), dh-autoreconf, dh-exec, pkg-config, libgtk-3-dev, x11proto-core-dev, libx11-dev, imagemagick, python3
 Homepage: https://www.chiark.greenend.org.uk/~sgtatham/putty/
-Vcs-Git: https://salsa.debian.org/ssh-team/putty
+Vcs-Git: https://salsa.debian.org/ssh-team/putty.git
 Vcs-Browser: https://salsa.debian.org/ssh-team/putty
+Rules-Requires-Root: binary-targets
 
 Package: pterm
 Section: x11
@@ -14,6 +15,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: putty-doc
 Provides: x-terminal-emulator
+Multi-Arch: foreign
 Description: PuTTY terminal emulator
  This is an X terminal emulator based on the popular Windows SSH client,
  PuTTY. It supports xterm escape sequences, plus some Linux console
@@ -28,6 +30,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, putty-tools
 Suggests: putty-doc
 Breaks: putty-tools (<< 0.68-2~)
 Replaces: putty-tools (<< 0.68-2~)
+Multi-Arch: foreign
 Description: Telnet/SSH client for X
  This is the Unix port of the popular Windows SSH client, PuTTY. It supports
  flexible terminal setup, mid-session reconfiguration using Ctrl-rightclick,
@@ -41,6 +44,7 @@ Package: putty-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: putty-doc
+Multi-Arch: foreign
 Description: command-line tools for SSH, SCP, and SFTP
  This package provides four command-line tools from the PuTTY suite that
  allow various kinds of secure interaction with remote systems.
@@ -68,6 +72,7 @@ Package: putty-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
+Multi-Arch: foreign
 Description: PuTTY HTML documentation
  Full HTML documentation for the PuTTY suite of programs (PuTTY, pterm,
  Plink, PSCP, PSFTP, and PuTTYgen).
