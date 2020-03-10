@@ -2,7 +2,7 @@
 %:
 	dh $@ --with=autoreconf --parallel
 
-ptermtmp = debian/pterm
+ptermtmp = debian/pterm-focal-backport
 
 export DEB_BUILD_MAINT_OPTIONS := hardening=+all
 export DEB_CPPFLAGS_MAINT_APPEND := -D_FILE_OFFSET_BITS=64

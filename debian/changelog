@@ -1,3 +1,9 @@
+putty-focal-backport (0.73-1bb1) unstable; urgency=medium
+
+  * Rename package.
+
+ -- Sandor Oroszi <sandor.oroszi@oneidentity.com>  Tue, 10 Mar 2020 15:55:00 +0100
+
 putty (0.73-1) unstable; urgency=medium
 
   * New upstream release.
