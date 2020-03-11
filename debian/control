@@ -11,7 +11,7 @@ Section: x11
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: putty-focal-backport-doc
-Provides: x-terminal-emulator, pterm
+Provides: x-terminal-emulator, pterm (= 0.73)
 Conflicts: pterm
 Multi-Arch: foreign
 Description: PuTTY terminal emulator
@@ -28,7 +28,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, putty-focal-backport-tools
 Suggests: putty-focal-backport-doc
 Breaks: putty-tools (<< 0.68-2~)
 Replaces: putty-tools (<< 0.68-2~)
-Provides: putty
+Provides: putty (= 0.73)
 Conflicts: putty
 Multi-Arch: foreign
 Description: Telnet/SSH client for X
@@ -44,7 +44,7 @@ Package: putty-focal-backport-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: putty-focal-backport-doc
-Provides: putty-tools
+Provides: putty-tools (= 0.73)
 Conflicts: putty-tools
 Multi-Arch: foreign
 Description: command-line tools for SSH, SCP, and SFTP
@@ -74,7 +74,7 @@ Package: putty-focal-backport-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
-Provides: putty-doc
+Provides: putty-doc (= 0.73)
 Conflicts: putty-doc
 Multi-Arch: foreign
 Description: PuTTY HTML documentation
